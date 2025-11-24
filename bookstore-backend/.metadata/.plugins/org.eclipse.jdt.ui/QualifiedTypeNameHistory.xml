@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.bookstore.repository.CartRepository"/>
-    <fullyQualifiedTypeName name="com.bookstore.repository.WishlistRepository"/>
-    <fullyQualifiedTypeName name="com.bookstore.service.UserService"/>
-    <fullyQualifiedTypeName name="com.bookstore.security.JwtAuthenticationFilter"/>
-</qualifiedTypeNameHistroy>
