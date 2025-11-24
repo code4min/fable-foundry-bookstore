@@ -1,0 +1,22 @@
+package com.bookstore.controller;
+
+import com.bookstore.service.GeminiService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/ai")
+@CrossOrigin(origins = "http://localhost:3000")  // your React app
+public class AiChatController {
+
+    @Autowired
+    private GeminiService geminiService;
+
+    @PostMapping("/chat")
+    public String chat(@RequestBody Map<String, String> request) {
+        String userMessage = request.get("message");
+        return geminiService.generateResponse(userMessage);
+    }
+
+
+}

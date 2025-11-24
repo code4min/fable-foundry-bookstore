@@ -1,0 +1,62 @@
+.landing-hero {
+  flex: 1;
+  background-image: url('/public/images/library.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 16px;
+  text-align: center;
+  background-color: #c7a687;
+  position: relative;
+}
+
+.landing-hero-overlay {
+  background-color: rgba(137, 103, 70, 0.805); /* transparent dark brown */
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 700px;
+  margin: auto;
+  animation: fadeIn 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.landing-hero h3,
+.landing-hero h6 {
+  color: white;
+}
+
+.landing-button-contained {
+  background-color: black !important;
+  color: #e7b931 !important;
+  margin-right: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.landing-button-contained:hover {
+  background-color: #D5C58A !important;
+  color: black !important;
+}
+
+.landing-button-outlined {
+  border-color: black !important;
+  color: black !important;
+  transition: all 0.3s ease;
+}
+
+.landing-button-outlined:hover {
+  border-color: #D5C58A !important;
+  color: #D5C58A !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
