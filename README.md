@@ -47,17 +47,18 @@ An Admin Dashboard provides full control over books, users, analytics, and logs.
 ## Visual Preview:
 | Section         | Image                                               |
 | --------------- | --------------------------------------------------- |
-| Landing Page    |                                                     |
-| User Dashboard  |                                                     |
-| About           |                                                     |
-| Wishlist        | ![User Dashboard](screenshots/user-dashboard.png)   |
-| Cart            | ![Admin Dashboard](screenshots/admin-dashboard.png) |
-| Profile         | ![Cart](screenshots/cart.png)                       |
-| Admin Dashboard | ![Cart](screenshots/cart.png)                       |
-| Books           | ![Cart](screenshots/cart.png)                       |
-| Orders          | ![Cart](screenshots/cart.png)                       |
-| Users           | ![Cart](screenshots/cart.png)                       |
-| Report          | ![Cart](screenshots/cart.png)                       |
+| Landing Page    | ![Landing Page](./screenshots/landingpg.jpg)        |
+| User Dashboard  | ![User Dashboard](./screenshots/user_dashboard.jpg) |
+| Book Detail     | ![Book Detail](./screenshots/bookdetail.jpg)        |
+| About           | ![About](./screenshots/about.jpg)                   |
+| Wishlist        | ![Wishlist](./screenshots/wishlist.jpg)             |
+| Cart            | ![Cart](./screenshots/cart.jpg)                     |
+| Profile         | ![Profile](./screenshots/profile.jpg)               |
+| Admin Dashboard | ![Admin Dashboard](./screenshots/ad_dashboard.jpg)  |
+| Books           | ![Books](./screenshots/ad_books.jpg)                |
+| Orders          | ![Orders](./screenshots/ad_orders.jpg)              |
+| Users           | ![Users](./screenshots/ad_users.jpg)                |
+| Report          | ![Report](./screenshots/ad_report.jpg)              |
 
 ## License: 
 The project is licensed under **MIT license** .
