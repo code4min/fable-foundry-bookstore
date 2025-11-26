@@ -7,37 +7,37 @@ Users can easily explore books, manage carts, purchase titles, track orders, and
 An Admin Dashboard provides full control over books, users, analytics, and logs.
 
 ## Features:
-### User Features
-+ Login & secure authentication
-+ Browse books by categories & filters
-+ Add to wishlist
-+ Add to cart & purchase books
-+ Track order status:  Order Placed → Processing → Shipped → Out for Delivery → Delivered
-+ Manage user profile
-+ View complete order history (with timestamps)
-+ AI-powered chatbot assistant to help users explore books
+  ### User Features
+  + Login & secure authentication
+  + Browse books by categories & filters
+  + Add to wishlist
+  + Add to cart & purchase books
+  + Track order status:  Order Placed → Processing → Shipped → Out for Delivery → Delivered
+  + Manage user profile
+  + View complete order history (with timestamps)
+  + AI-powered chatbot assistant to help users explore books
 
-### Admin Features
-+ Manage books (add, update, delete)
-+ Manage users
-+ Sales analytics & reports
-+ View system logs
+  ### Admin Features
+  + Manage books (add, update, delete)
+  + Manage users
+  + Sales analytics & reports
+  + View system logs
 
 ## Tech Stack:
-### Frontend
-+ React.js
-+ CSS - MUI
-+ Axios
+  ### Frontend
+  + React.js
+  + CSS - MUI
+  + Axios
+    
+  ### Backend
+  + Java Spring Boot
+  + Spring Security
+  + MySQL
   
-### Backend
-+ Java Spring Boot
-+ Spring Security
-+ MySQL
-
-### Tools
-+ VSCode for the frontend
-+ Spring Tool Suite for the backend
-+ MySQL Workbench for database
+  ### Tools
+  + VSCode for the frontend
+  + Spring Tool Suite for the backend
+  + MySQL Workbench for database
 
 ## Getting Started (Local Setup): 
 1. Clone the repository.
