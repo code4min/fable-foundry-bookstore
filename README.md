@@ -7,8 +7,8 @@
 ![Database-MySQL](https://img.shields.io/badge/Database-MySQL-4479A1?logo=mysql&logoColor=white)
 ![Build-Node](https://img.shields.io/badge/Build-npm-orange?logo=npm)
 ![Java](https://img.shields.io/badge/Java-17-orange?logo=oracle)
-![Issues](https://img.shields.io/github/issues/code4min/FableFoundry)
-![Stars](https://img.shields.io/github/stars/code4min/FableFoundry?style=social)
+![Issues](https://img.shields.io/github/issues/code4min/fable-foundry-bookstore)
+![Stars](https://img.shields.io/github/stars/code4min/fable-foundry-bookstore?style=social)
 
 A modern online bookstore where readers can browse, wishlist, and purchase their favorite books , powered by a fullstack **Java Spring + React platform**.
 
