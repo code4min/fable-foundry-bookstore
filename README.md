@@ -1,4 +1,15 @@
 # Fable Foundry : Online Bookstore
+
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-blue)
+![Frontend-React](https://img.shields.io/badge/Frontend-React.js-61dafb?logo=react&logoColor=white)
+![Backend-Spring](https://img.shields.io/badge/Backend-SpringBoot-6DB33F?logo=springboot&logoColor=white)
+![Database-MySQL](https://img.shields.io/badge/Database-MySQL-4479A1?logo=mysql&logoColor=white)
+![Build-Node](https://img.shields.io/badge/Build-npm-orange?logo=npm)
+![Java](https://img.shields.io/badge/Java-17-orange?logo=oracle)
+![Issues](https://img.shields.io/github/issues/code4min/FableFoundry)
+![Stars](https://img.shields.io/github/stars/code4min/FableFoundry?style=social)
+
 A modern online bookstore where readers can browse, wishlist, and purchase their favorite books , powered by a fullstack **Java Spring + React platform**.
 
 ## Project Overview:
