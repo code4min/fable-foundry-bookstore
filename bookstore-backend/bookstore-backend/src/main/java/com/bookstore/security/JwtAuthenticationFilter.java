@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 if (email != null && jwtUtil.validateToken(token, email)) {
                 	
-                	// Block token usage if account is inactive
+                	
                     var user = userService.getByEmail(email);
                     if (user == null || !user.isActive()) {
                         response.sendError(HttpServletResponse.SC_FORBIDDEN, "Account is deactivated");
