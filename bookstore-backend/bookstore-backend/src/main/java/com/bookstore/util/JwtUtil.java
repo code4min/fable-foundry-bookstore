@@ -10,7 +10,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "my-very-secret-key-which-is-32-bytes!!";
+    private static final String SECRET_KEY = "secret-key";
 
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
