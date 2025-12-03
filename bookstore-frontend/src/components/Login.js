@@ -33,22 +33,22 @@ function Login() {
 
       const data = response.data;
       const token = data.token;
-      const roleFromResponse = data.role || ""; // e.g. "ROLE_ADMIN" or "ADMIN"
+      const roleFromResponse = data.role || ""; 
       const name = data.name || "";
       const emailResp = data.email || email;
 
-      // normalize role: remove ROLE_ prefix and uppercase for reliable checks
+      
       let normalized = roleFromResponse.toString().toUpperCase();
       if (normalized.startsWith("ROLE_")) normalized = normalized.substring(5);
 
-      // Save to localStorage
+     
       localStorage.setItem("token", token);
-      localStorage.setItem("role", roleFromResponse); // store original form too
-      localStorage.setItem("role_normalized", normalized); // handy for quick checks
+      localStorage.setItem("role", roleFromResponse); 
+      localStorage.setItem("role_normalized", normalized); 
       localStorage.setItem("name", name);
       localStorage.setItem("email", emailResp);
 
-      // Redirect by role
+      
       if (normalized === "ADMIN") {
         navigate("/admin/dashboard");
       } else {
@@ -56,7 +56,7 @@ function Login() {
       }
     } catch (err) {
       console.error("Login error:", err);
-      // Better error message if backend returns 401 etc.
+      
       if (err.response && err.response.status === 401) {
         setError("Invalid email or password");
       } else if (err.response && err.response.data) {
