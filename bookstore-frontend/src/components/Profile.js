@@ -35,18 +35,18 @@ const Profile = () => {
   const name = localStorage.getItem("name");
   const token = localStorage.getItem("token");
 
-  //const [password, setPassword] = useState("");
+  
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
-  const [currentPassword, setCurrentPassword] = useState(""); // 🔥 ADDED
+  const [currentPassword, setCurrentPassword] = useState(""); 
   const [newPassword, setNewPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const [purchaseHistory, setPurchaseHistory] = useState([]);
-  const [sortAsc, setSortAsc] = useState(false); // default: newest first
+  const [sortAsc, setSortAsc] = useState(false); 
   const [openDeactivateDialog, setOpenDeactivateDialog] = useState(false);
 
-  // Fetch user info on mount
+ 
   useEffect(() => {
     if (!email || !token) return;
 
@@ -61,7 +61,7 @@ const Profile = () => {
       });
   }, [email, token]);
 
-  // Fetch purchase history
+  
   useEffect(() => {
     if (email) {
       axiosInstance
@@ -100,7 +100,7 @@ const Profile = () => {
     let contactUpdated = false;
     let passwordUpdated = false;
 
-    // Step 1: Update Contact
+    
     if (phoneNumber.trim() !== "" || address.trim() !== "") {
       try {
         await axiosInstance.put("http://localhost:8080/api/auth/updateContact", {
@@ -114,20 +114,20 @@ const Profile = () => {
       }
     }
 
-    // Step 2: Update Password
+    
     if (currentPassword.trim() !== "" && newPassword.trim() !== "") {
       try {
         await axiosInstance.put(
           "http://localhost:8080/api/auth/changePassword",
           {
             email,
-            oldPassword: currentPassword, // 🔥 UPDATED
-            newPassword: newPassword, // 🔥 UPDATED
+            oldPassword: currentPassword, 
+            newPassword: newPassword, 
           }
         );
         passwordUpdated = true;
 
-        setCurrentPassword(newPassword); // new password becomes the "current" one
+        setCurrentPassword(newPassword); 
         setNewPassword(""); 
       } catch (error) {
         console.error("Error updating password:", error);
@@ -135,7 +135,7 @@ const Profile = () => {
     }
 
     if (contactUpdated || passwordUpdated) {
-      // keep existing behaviour (alerts)
+      
       alert("Profile updated successfully!");
     } else {
       alert("No changes were made or there was an error.");
@@ -146,7 +146,7 @@ const Profile = () => {
     setSortAsc((prev) => !prev);
   };
 
-  // status color mapper (keeps existing logic, but we will map to visual style)
+
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
       case "processing":
@@ -162,15 +162,13 @@ const Profile = () => {
     }
   };
 
-  // Palette used (kept consistent with app):
-  // rustic brown: #7a5c42 / #9b7b55
-  // parchment: #f8e2b4ff (page) / cream card: #F8F3D9
+  
 
   return (
     <Box display="flex" flexDirection="column" minHeight="100vh">
       <Header />
 
-      {/* Full-page soft background (only for Profile page) */}
+     
       <Box
         sx={{
           minHeight: "100vh",
@@ -184,12 +182,12 @@ const Profile = () => {
       >
 
         <Container sx={{ maxWidth: "lg !important" }}>
-          {/* Narrow parchment panel (journal-style) */}
+          
           <Box
             sx={{
               width: "100%",
               maxWidth: 1000,
-              ml: { xs: 2, md: 6 },   // moves it LEFT
+              ml: { xs: 2, md: 6 },   
               backgroundColor: "#f5e2c0",
               backgroundImage:
                 "url('https://www.transparenttextures.com/patterns/paper.png')",
@@ -219,7 +217,7 @@ const Profile = () => {
               </Button>
             </Box>
 
-            {/* Deactivate Dialog (styled paper via sx) */}
+            
             <Dialog
               open={openDeactivateDialog}
               onClose={handleCloseDeactivateDialog}
@@ -254,7 +252,7 @@ const Profile = () => {
               </DialogActions>
             </Dialog>
 
-            {/* Profile form fields */}
+            
             <Stack spacing={2} sx={{ mt: 2 }}>
               <TextField
                 label="Name"
@@ -296,7 +294,7 @@ const Profile = () => {
                 }}
               />
 
-              {/* 🔥 New Password */}
+              
               <TextField
                 label="New Password"
                 type={showPassword ? "text" : "password"}
@@ -343,7 +341,7 @@ const Profile = () => {
 
           </Box>
 
-          {/* Purchase History Banner */}
+          
           <Box sx={{ maxWidth: 1100, mx: "auto", mt: 4 }}>
             <Box
               sx={{
@@ -371,7 +369,7 @@ const Profile = () => {
               </Tooltip>
             </Box>
 
-            {/* Purchase Cards (cream, not parchment) */}
+            
             {purchaseHistory.length === 0 ? (
               <Typography sx={{ mt: 2, color: "#3A2F2F" }}>No purchases yet.</Typography>
             ) : (
