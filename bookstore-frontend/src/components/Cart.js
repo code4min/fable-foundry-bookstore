@@ -155,7 +155,7 @@ const Cart = () => {
       flexDirection="column"
       minHeight="100vh"
       sx={{
-        // ✅ 1) Same background as Wishlist
+        
         background: 'linear-gradient(135deg, #FCF7E8, #F4ECD2)',
       }}
     >
@@ -186,7 +186,7 @@ const Cart = () => {
                       p: 2,
                       borderRadius: 3,
 
-                      // ✅ 2) Parchment paper card style (matching Wishlist)
+                      
                       backgroundColor: '#f8e2b4ff',
                       backgroundImage:
                         "url('https://www.transparenttextures.com/patterns/paper.png')",
@@ -239,7 +239,7 @@ const Cart = () => {
                       )}
                     </Box>
 
-                    {/* REMOVE BUTTON (styled like Wishlist) */}
+                    
                     <Button
                       variant="outlined"
                       onClick={() => askRemove(book)}
@@ -260,7 +260,7 @@ const Cart = () => {
 
               <Divider sx={{ my: 4 }} />
 
-              {/* DELIVERY SECTION (soft paper background) */}
+              
               <Paper
                 elevation={1}
                 sx={{
@@ -331,7 +331,7 @@ const Cart = () => {
                   Total Price: ₹{totalPrice}
                 </Typography>
 
-                {/* CHECKOUT BUTTON — matches Wishlist brown tones */}
+                
                 <Button
                   variant="contained"
                   sx={{
@@ -350,13 +350,13 @@ const Cart = () => {
             </>
           )}
 
-          {/* Confirm Remove Dialog */}
+         
           <Dialog
             open={confirmOpen}
             onClose={() => setConfirmOpen(false)}
             PaperProps={{
               sx: {
-                backgroundColor: "#F8F3D9",  // soft beige (matches Wishlist card)
+                backgroundColor: "#F8F3D9",  
                 borderRadius: 3,
                 paddingBottom: 1
               }
