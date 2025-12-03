@@ -32,7 +32,7 @@ function Header() {
           component="div"
           sx={{
             color: 'white',
-            fontFamily: `'Playfair Display', cursive`, // elegant font
+            fontFamily: `'Playfair Display', cursive`, 
             fontWeight: 600,
           }}
         >
