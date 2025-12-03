@@ -35,7 +35,7 @@ const AdminCategories = () => {
   const [snackbar, setSnackbar] = useState({ open: false, message: "", severity: "success" });
   const [deleteDialog, setDeleteDialog] = useState({ open: false, id: null });
 
-  // Fetch all categories
+  
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -49,7 +49,7 @@ const AdminCategories = () => {
     }
   };
 
-  // Open Add/Edit dialog
+  
   const handleOpenDialog = (category = null) => {
     setEditingCategory(category);
     setCategoryName(category ? category.name : "");
@@ -62,7 +62,7 @@ const AdminCategories = () => {
     setCategoryName("");
   };
 
-  // Add or update category
+  
   const handleSaveCategory = async () => {
     try {
       if (editingCategory) {
@@ -79,7 +79,7 @@ const AdminCategories = () => {
     }
   };
 
-  // Delete category confirmation
+  
   const handleDeleteCategory = async () => {
     try {
       await axiosInstance.delete(`/categories/${deleteDialog.id}`);
@@ -98,7 +98,7 @@ const AdminCategories = () => {
         Manage Categories
       </Typography>
 
-      {/* Add Category Button */}
+      
       <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
         <Button
           variant="contained"
@@ -114,7 +114,7 @@ const AdminCategories = () => {
         </Button>
       </Box>
 
-      {/* Categories Table */}
+     
       <TableContainer
         component={Paper}
         sx={{
@@ -168,7 +168,7 @@ const AdminCategories = () => {
         </Table>
       </TableContainer>
 
-      {/* Add/Edit Category Dialog */}
+     
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle sx={{ backgroundColor: "#9E9770", color: "white", pb :1 }}>
           {editingCategory ? "Edit Category" : "Add Category"}
@@ -203,7 +203,7 @@ const AdminCategories = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Delete Confirmation Dialog */}
+      
       <Dialog open={deleteDialog.open} onClose={() => setDeleteDialog({ open: false, id: null })}>
         <DialogTitle sx={{ backgroundColor: "#9E9770", color: "white" }}>
           Confirm Deletion
@@ -225,7 +225,7 @@ const AdminCategories = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Snackbar Notifications */}
+      
       <Snackbar
         open={snackbar.open}
         autoHideDuration={3000}
