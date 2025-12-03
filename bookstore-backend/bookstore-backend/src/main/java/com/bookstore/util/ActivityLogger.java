@@ -15,12 +15,12 @@ public class ActivityLogger {
     @Autowired
     private UserActivityService userActivityService;
 
-    // log when you already have the userId
+    
     public void log(Long userId, String action, String details) {
         userActivityService.logActivity(userId, action, details);
     }
 
-    // log using user’s email (common case)
+    
     public void logByEmail(String email, String action, String details) {
         User user = userRepository.findByEmail(email).orElse(null);
         if (user != null) {
