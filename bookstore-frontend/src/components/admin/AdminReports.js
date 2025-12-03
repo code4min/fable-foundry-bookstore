@@ -9,17 +9,11 @@ import {
   Button,
   CircularProgress,
   Paper,
-  //Table,
-  //TableHead,
-  //TableRow,
-  //TableCell,
-  //TableBody,
   TextField,
   Divider,
   Snackbar,
   Alert,
   IconButton,
-  //Stack,
 } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 import RefreshIcon from "@mui/icons-material/Refresh";
@@ -65,7 +59,7 @@ const ENDPOINT = {
 const COLORS_PIE = [THEME.sage, "#C9B79B", "#A7B29B", THEME.beige2 , THEME.brown];
 
 const AdminReports = () => {
-  // date range (default: last 30 days)
+  
   const [startDate, setStartDate] = useState(() => {
     const d = new Date();
     d.setDate(d.getDate() - 29);
@@ -73,19 +67,19 @@ const AdminReports = () => {
   });
   const [endDate, setEndDate] = useState(() => new Date());
 
-  // data
+ 
   const [summary, setSummary] = useState(null);
   const [dailySales, setDailySales] = useState([]);
   const [salesByCategory, setSalesByCategory] = useState([]);
   const [bestSellers, setBestSellers] = useState([]);
   const [inventory, setInventory] = useState([]);
 
-  // UI state
+ 
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(false); // for refresh button
   const [notif, setNotif] = useState({ open: false, message: "", severity: "success" });
 
-  // map date to backend string
+  
   const fmt = (d) => format(d, "yyyy-MM-dd");
 
   const fetchAll = async (opts = {}) => {
@@ -94,7 +88,7 @@ const AdminReports = () => {
     const end = opts.end || fmt(endDate);
 
     try {
-      // Summary
+      
       const [summaryRes, dailyRes, catRes, bestRes, invRes] = await Promise.all([
         axiosInstance.get(`${ENDPOINT.SUMMARY}?start=${start}&end=${end}`),
         axiosInstance.get(`${ENDPOINT.DAILY_SALES}?start=${start}&end=${end}`),
@@ -105,7 +99,7 @@ const AdminReports = () => {
 
       setSummary(summaryRes.data || null);
 
-      // daily mapping
+      
       const mappedDaily = (dailyRes.data || []).map((d) => ({
         date: d.date ?? d.dateString ?? d[0],
         sales: Number(d.salesAmount ?? d.revenue ?? d.amount ?? d[1] ?? 0),
@@ -125,13 +119,13 @@ const AdminReports = () => {
       }));
       setBestSellers(mappedBest);
 
-      // Inventory: support both per-book list or summary single object
+      
       const invPayload = invRes.data;
       let invNormalized = [];
       if (Array.isArray(invPayload)) {
-        // could be list of books or a single summary-object array
+       
         if (invPayload.length > 0 && (invPayload[0].bookId !== undefined || invPayload[0].title !== undefined)) {
-          // per-book list
+          
           invNormalized = invPayload.map((it) => ({
             bookId: it.bookId ?? it.id ?? null,
             title: it.title ?? it.name ?? "—",
@@ -139,7 +133,7 @@ const AdminReports = () => {
             stock: Number(it.stock ?? it.quantity ?? it[3] ?? 0),
           }));
         } else {
-          // assume summary (first element contains summary fields)
+          
           invNormalized = [
             {
               summaryTotalStock: invPayload[0]?.totalStock ?? invPayload[0]?.total ?? invPayload[0]?.summaryTotalStock ?? null,
@@ -149,7 +143,7 @@ const AdminReports = () => {
           ];
         }
       } else if (invPayload && typeof invPayload === "object") {
-        // sometimes backend returns a single object
+        
         if (invPayload.bookId !== undefined || invPayload.title !== undefined) {
           invNormalized = [
             {
@@ -182,13 +176,13 @@ const AdminReports = () => {
   };
 
   useEffect(() => {
-    // initial load
+    
     setLoading(true);
     fetchAll().finally(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, []);
 
-  // Derived values for charts
+  
   const lineData = useMemo(
     () =>
       dailySales.map((d) => ({
@@ -200,7 +194,7 @@ const AdminReports = () => {
 
   const pieData = useMemo(() => salesByCategory.map((s) => ({ name: s.name, value: s.revenue })), [salesByCategory]);
 
-  // CSV export helper (simple)
+  
   const downloadCSV = () => {
     const lines = [];
     lines.push(["Report Summary"]);
@@ -223,7 +217,7 @@ const AdminReports = () => {
     lines.push(["Title", "Count"]);
     for (const b of bestSellers) lines.push([b.title, b.count]);
     lines.push([]);
-    // inventory
+    
     if (inventory.length && inventory[0].bookId !== undefined) {
       lines.push(["Inventory"]);
       lines.push(["BookId", "Title", "Category", "Stock"]);
@@ -286,7 +280,7 @@ const AdminReports = () => {
         </Box>
       ) : (
         <>
-          {/* Summary cards */}
+          
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} md={3}>
               <Card sx={{ backgroundColor: "#e5dcbb" }}>
@@ -337,7 +331,7 @@ const AdminReports = () => {
 
           <Divider sx={{ my: 3 }} />
 
-          {/* Row 2: Sales charts */}
+          
           <Grid container spacing={5}>
             <Grid item xs={12} md={7}>
               <Card sx={{ p: 2, backgroundColor: "#f3edda", minHeight: 360, minWidth :810 }}>
@@ -378,7 +372,7 @@ const AdminReports = () => {
 
           <Divider sx={{ my: 3 }} />
 
-          {/* Row 3: Best sellers + Inventory Card */}
+          
           <Grid container spacing={5}>
             <Grid item xs={12} md={7}>
               <Card sx={{ p: 2, backgroundColor: "#f3edda", minHeight: 360, minWidth: 810 }}>
@@ -398,7 +392,7 @@ const AdminReports = () => {
             </Grid>
 
             <Grid item xs={12} md={5}>
-              {/* InventoryCard shows mini chart and metrics; it will adapt to summary or per-book data */}
+              
               <InventoryCard inventoryData={inventory} theme={THEME} />
             </Grid>
           </Grid>
