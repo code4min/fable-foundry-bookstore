@@ -118,7 +118,7 @@ function Dashboard() {
             </Button>
           </Box>
 
-          {/* center cluster: category + unified search controls */}
+          
           <Box sx={{
             display: "flex",
             alignItems: "center",
@@ -127,7 +127,7 @@ function Dashboard() {
             justifyContent: "flex-start",
           }}>
           <Box>
-            {/* Category Button (normal button with label) */}
+            
             <Button
               onClick={handleCategoryMenuOpen}
               sx={{
@@ -161,7 +161,7 @@ function Dashboard() {
             <Box sx={{ width: "150px" }} />
 
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            {/* Unified Search Bar */}
+            
             <TextField
               size="small"
               placeholder="Search by author or title..."
@@ -169,7 +169,7 @@ function Dashboard() {
               onChange={(e) => {
                 const value = e.target.value;
                 setSearchTerm(value);
-                // typing a search should clear category selection to let search take precedence
+        
                 setSelectedCategory(null);
               }}
               sx={{ backgroundColor: "#eadbb1", width: { xs: 180, sm: 300, md: 350 } }}
@@ -178,7 +178,7 @@ function Dashboard() {
               }}
             />
 
-            {/* Clear filters quick button */}
+            
             {(selectedCategory || (searchTerm && searchTerm.trim() !== "")) && (
               <Tooltip title="Clear filters" arrow>
                 <IconButton
@@ -234,7 +234,7 @@ function Dashboard() {
         </Typography>
       </Container>
 
-      {/* Trending Books Section — HIDE if any filter/search is active */}
+      
       {!isFilterActive && (
         <Container sx={{ mb: 4 }}>
           <Typography variant="h5" sx={{ color: "#3E2723", mb: 2 }}>
@@ -327,7 +327,7 @@ function Dashboard() {
             All Books
           </Typography>
 
-          {/* show active filter indicator */}
+          
           <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
             {selectedCategory && (
               <Typography variant="body2" sx={{ color: "#fff" }}>
@@ -342,7 +342,7 @@ function Dashboard() {
           </Box>
         </Box>
 
-        {/* Active Filter message */}
+       
         {(selectedCategory || searchTerm) && (
           <Typography variant="subtitle1" sx={{ color: "#5D4037", mt: 2 }}>
             Showing books in: <strong>{selectedCategory ? selectedCategory.name : "All Categories"}</strong>{" "}
