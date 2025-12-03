@@ -50,13 +50,13 @@ function Register() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           sx={{
-                backgroundColor: '#fff',  // your desired color
+                backgroundColor: '#fff',  
                 '& input': {
                   backgroundColor: '#fff',
                 },
                 '& input:-webkit-autofill': {
                   WebkitBoxShadow: '0 0 0 1000px #fff inset',
-                  WebkitTextFillColor: '#000', // optional: change text color
+                  WebkitTextFillColor: '#000', 
                 },
                 '& input:focus': {
                   backgroundColor: '#fff',
@@ -73,13 +73,13 @@ function Register() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           sx={{
-                backgroundColor: '#fff',  // your desired color
+                backgroundColor: '#fff',  
                 '& input': {
                   backgroundColor: '#fff',
                 },
                 '& input:-webkit-autofill': {
                   WebkitBoxShadow: '0 0 0 1000px #fff inset',
-                  WebkitTextFillColor: '#000', // optional: change text color
+                  WebkitTextFillColor: '#000', 
                 },
                 '& input:focus': {
                   backgroundColor: '#fff',
@@ -96,13 +96,13 @@ function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           sx={{
-                backgroundColor: '#fff',  // your desired color
+                backgroundColor: '#fff',  
                 '& input': {
                   backgroundColor: '#fff',
                 },
                 '& input:-webkit-autofill': {
                   WebkitBoxShadow: '0 0 0 1000px #fff inset',
-                  WebkitTextFillColor: '#000', // optional: change text color
+                  WebkitTextFillColor: '#000', 
                 },
                 '& input:focus': {
                   backgroundColor: '#fff',
