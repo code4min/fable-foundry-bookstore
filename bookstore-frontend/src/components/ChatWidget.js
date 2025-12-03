@@ -8,14 +8,14 @@ const ChatWidget = () => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false); // NEW
+  const [loading, setLoading] = useState(false); 
 
   const sendMessage = async () => {
     if (!input.trim()) return;
 
     const userMsg = { sender: "user", text: input };
     setMessages(prev => [...prev, userMsg]);
-    setLoading(true); // NEW
+    setLoading(true); 
 
     try {
       const res = await axios.post(
@@ -24,7 +24,7 @@ const ChatWidget = () => {
         { headers: { "Content-Type": "application/json" } }
       );
 
-      // Backend returns plain TEXT response → No more res.data.response
+     
       const botMsg = { sender: "bot", text: res.data };
       setMessages(prev => [...prev, botMsg]);
 
@@ -36,13 +36,13 @@ const ChatWidget = () => {
       ]);
     }
 
-    setLoading(false); // NEW
+    setLoading(false); 
     setInput("");
   };
 
   return (
     <>
-      {/* Floating Chat Button */}
+      
       {!open && (
         <IconButton
           onClick={() => setOpen(true)}
