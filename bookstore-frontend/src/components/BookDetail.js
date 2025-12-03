@@ -7,9 +7,7 @@ import { Typography, Button, Snackbar, IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled, keyframes } from "@mui/material/styles";
 
-/* -----------------------------
-   Soft fade + slide animation (Option A)
-   ----------------------------- */
+
 const fadeSlide = keyframes`
   from {
     opacity: 0;
@@ -21,9 +19,7 @@ const fadeSlide = keyframes`
   }
 `;
 
-/* -----------------------------
-   Styled Page component (aged paper + curls)
-   ----------------------------- */
+
 const Page = styled(Box)(({ theme, side }) => ({
   backgroundColor: "#f9e7beff",
   backgroundImage:
@@ -151,9 +147,7 @@ export default function BookDetail() {
   }
 
   return (
-    /* ----------------------------------
-       FULL PAGE BACKGROUND FIX (ONLY CHANGE)
-       ---------------------------------- */
+
     <Box
       sx={{
         minHeight: "100vh",
@@ -236,10 +230,10 @@ export default function BookDetail() {
         <Page
           side="right"
           sx={{
-            pl: { md: 7 },      // increased for better centering
-            pr: { md: 3 },      // new: adds symmetry
-            maxWidth: "520px",  // keeps text centered visually
-            margin: "0 auto",   // fully centers inside the page
+            pl: { md: 7 },      
+            pr: { md: 3 },      
+            maxWidth: "520px",  
+            margin: "0 auto",   
             animationDelay: "120ms",
             display: "flex",
             flexDirection: "column",
