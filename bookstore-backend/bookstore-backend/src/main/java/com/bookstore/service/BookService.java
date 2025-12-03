@@ -20,24 +20,24 @@ public class BookService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    // ✅ Fetch all books
+    
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
-    // ✅ Fetch by ID
+    
     public Optional<Book> getBookById(Long id) {
         return bookRepository.findById(id);
     }
 
-    // ✅ Add book using DTO
+    
     public Book addBook(BookRequest bookRequest) {
         Book book = new Book();
         mapDtoToBook(bookRequest, book);
         return bookRepository.save(book);
     }
 
-    // ✅ Update book using DTO
+    
     public Book updateBook(Long id, BookRequest bookRequest) {
         Optional<Book> existingBookOpt = bookRepository.findById(id);
         if (existingBookOpt.isPresent()) {
@@ -48,7 +48,7 @@ public class BookService {
         return null;
     }
 
-    // ✅ Delete book
+    
     public boolean deleteBook(Long id) {
         if (bookRepository.existsById(id)) {
             bookRepository.deleteById(id);
@@ -59,16 +59,16 @@ public class BookService {
     
     
     public Book checkAvailability(String title) {
-        // Try exact match first
+        
         Book book = bookRepository.findByTitleIgnoreCase(title);
         
         if (book != null) return book;
 
-        // Fallback: partial match
+        
         List<Book> fuzzyMatches = bookRepository.findByTitleContainingIgnoreCase(title);
         
         if (!fuzzyMatches.isEmpty()) {
-            return fuzzyMatches.get(0); // Return the closest match
+            return fuzzyMatches.get(0); 
         }
 
         return null;
@@ -89,7 +89,7 @@ public class BookService {
 
 
 
-    // 🔹 Helper method for mapping
+   
     private void mapDtoToBook(BookRequest dto, Book book) {
         book.setTitle(dto.getTitle());
         book.setAuthor(dto.getAuthor());
@@ -111,7 +111,7 @@ public class BookService {
         }
     }
     
-    // ✅ Decrease stock after purchase
+    
     @Transactional
     public boolean decrementStock(Long bookId, int quantity) {
         Optional<Book> bookOpt = bookRepository.findById(bookId);
@@ -119,7 +119,7 @@ public class BookService {
 
         Book book = bookOpt.get();
         if (book.getStock() < quantity) {
-            return false; // Not enough stock
+            return false; 
         }
 
         book.setStock(book.getStock() - quantity);
@@ -127,7 +127,7 @@ public class BookService {
         return true;
     }
 
-    // ✅ Optional helper (for admin updates or validations)
+    
     public void updateStock(Long bookId, int newStock) {
         Optional<Book> bookOpt = bookRepository.findById(bookId);
         if (bookOpt.isPresent()) {
