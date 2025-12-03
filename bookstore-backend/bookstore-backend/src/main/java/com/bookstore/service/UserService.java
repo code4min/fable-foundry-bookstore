@@ -31,7 +31,7 @@ public class UserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
-            // Block login if account is inactive
+            
             if (!user.isActive()) {
                 return false;
             }
