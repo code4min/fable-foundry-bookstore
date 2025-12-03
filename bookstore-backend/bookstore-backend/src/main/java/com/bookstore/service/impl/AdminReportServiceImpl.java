@@ -31,7 +31,6 @@ public class AdminReportServiceImpl implements AdminReportService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    // ================== SUMMARY =====================
 
     @Override
     public ReportSummaryDTO getReportSummary(LocalDate start, LocalDate end) {
@@ -49,7 +48,7 @@ public class AdminReportServiceImpl implements AdminReportService {
         );
     }
 
-    // ================== DAILY SALES =====================
+   
 
     @Override
     public List<DailySalesDTO> getDailySales(LocalDate start, LocalDate end) {
@@ -63,7 +62,7 @@ public class AdminReportServiceImpl implements AdminReportService {
                 .collect(Collectors.toList());
     }
 
-    // ================== SALES BY CATEGORY =====================
+    
 
     @Override
     public List<SalesByCategoryDTO> getSalesByCategory(LocalDate start, LocalDate end) {
@@ -86,7 +85,7 @@ public class AdminReportServiceImpl implements AdminReportService {
                 .collect(Collectors.toList());
     }
 
-    // ================== BEST SELLERS =====================
+    
 
     @Override
     public List<BestSellerDTO> getBestSellers(int limit) {
@@ -104,7 +103,7 @@ public class AdminReportServiceImpl implements AdminReportService {
                 .collect(Collectors.toList());
     }
 
-    // ================== INVENTORY =====================
+    
 
     @Override
     public InventoryDTO getInventoryStatus() {
