@@ -13,7 +13,7 @@
 }
 
 .landing-hero-overlay {
-  background-color: rgba(137, 103, 70, 0.805); /* transparent dark brown */
+  background-color: rgba(137, 103, 70, 0.805); 
   padding: 40px;
   border-radius: 12px;
   max-width: 700px;
