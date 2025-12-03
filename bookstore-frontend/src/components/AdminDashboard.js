@@ -58,7 +58,7 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem("token"); // 🔹 read saved JWT
+      const token = localStorage.getItem("token"); 
 
       const config = {
         headers: {
