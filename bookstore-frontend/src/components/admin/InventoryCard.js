@@ -30,7 +30,7 @@ const InventoryCard = ({
   inventoryData = [],
   theme = { brown: "#4E342E", beige: "#D7CCC8", sage: "#9E9770" },
 }) => {
-  // Hooks must run always (unconditional)
+  
   const normalized = useMemo(() => {
     if (!Array.isArray(inventoryData)) return [];
 
@@ -188,7 +188,7 @@ const InventoryCard = ({
                 alignItems: "justify",
               }}
             >
-              {/* LEFT SIDE — Bigger text */}
+              
               <Box sx={{ flex: 1 }}>
                 <Typography
                   variant="h6"
@@ -229,8 +229,8 @@ const InventoryCard = ({
                
               </Box>
 
-              {/* RIGHT SIDE — Bigger Pie Chart */}
-              <Box sx={{ width: 300, height: 270 }}> {/* enlarged */}
+             
+              <Box sx={{ width: 300, height: 270 }}> 
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
