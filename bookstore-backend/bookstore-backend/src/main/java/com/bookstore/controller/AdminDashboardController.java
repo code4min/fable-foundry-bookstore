@@ -34,7 +34,7 @@ public class AdminDashboardController {
     @GetMapping("/low-stock")
     public List<InventoryItemDTO> lowStock(@RequestParam(defaultValue = "5") int threshold,
                                            @RequestParam(defaultValue = "10") int limit) {
-        // threshold => stock < threshold
+ 
         return dashboardService.getLowStock(threshold, limit);
     }
 

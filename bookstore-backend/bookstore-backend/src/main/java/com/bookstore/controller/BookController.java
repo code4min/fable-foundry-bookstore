@@ -46,13 +46,13 @@ public class BookController {
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
     
- // 🔎 Search books
+
     @GetMapping("/search")
     public List<Book> searchBooks(@RequestParam String q) {
         return bookService.searchBooks(q);
     }
 
-    // 📘 Check availability
+ 
     @GetMapping("/availability")
     public ResponseEntity<?> checkAvailability(@RequestParam String title) {
         Book book = bookService.checkAvailability(title);
@@ -62,7 +62,7 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-    // ⭐ Recommendations by category
+
     @GetMapping("/recommend")
     public List<Book> recommend(@RequestParam Long categoryId) {
         return bookService.recommendByCategory(categoryId);

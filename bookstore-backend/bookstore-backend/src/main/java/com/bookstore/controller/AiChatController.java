@@ -29,7 +29,7 @@ public class AiChatController {
         this.categoryRepository = categoryRepository;
     }
 
-    // Synonym → Category map (cleaned + improved)
+
     private static final Map<String, String> SYNONYM_TO_CATEGORY;
     static {
         Map<String,String> m = new HashMap<>();
@@ -58,7 +58,7 @@ public class AiChatController {
         m.put("crime", "Thriller");
         m.put("psychological", "Thriller");
 
-        // Danmei (improved multi-word handling)
+        // Danmei 
         m.put("danmei", "Danmei");
         m.put("bl", "Danmei");
         m.put("bl novel", "Danmei");
@@ -80,7 +80,7 @@ public class AiChatController {
         m.put("biography", "Non-Fiction");
         m.put("history", "Non-Fiction");
 
-        // Fiction (fallback)
+        // Fiction 
         m.put("fiction", "Fiction");
         m.put("novel", "Fiction");
         m.put("story", "Fiction");
@@ -88,7 +88,7 @@ public class AiChatController {
         SYNONYM_TO_CATEGORY = Collections.unmodifiableMap(m);
     }
 
-    // Triggers for recommendation intent (NOT used in category detection)
+
     private static final List<String> RECOMMEND_TRIGGERS = Arrays.asList(
             "recommend", "suggest", "give me", "any good", "what should i read",
             "something to read", "recommendation", "reading suggestion"
@@ -104,16 +104,16 @@ public class AiChatController {
 
         String lower = userMessage.toLowerCase();
 
-        // 1) Detect intent to recommend
+
         boolean wantsRecommendation = RECOMMEND_TRIGGERS.stream().anyMatch(lower::contains);
 
         if (wantsRecommendation) {
 
-            // 1.5) Detect category from synonyms
+
             String detectedCategory = detectCategoryFromText(lower);
 
             if (detectedCategory == null) {
-                detectedCategory = "Fiction"; // fallback
+                detectedCategory = "Fiction"; 
             }
 
             Optional<Category> categoryOpt = categoryRepository.findByNameIgnoreCase(detectedCategory);
@@ -145,7 +145,7 @@ public class AiChatController {
             }
         }
 
-        // 2) Availability search by title/author
+
         String cleaned = extractCleanTitle(lower);
 
         List<Book> found = bookService.searchByTitleOrAuthor(cleaned);
@@ -186,19 +186,16 @@ public class AiChatController {
             return reply.toString();
         }
 
-        // 3) Nothing matched — ask Gemini with DB context
+
         String dbContext = "No matching books found in Fable Foundry inventory.";
         return geminiService.generateResponse(userMessage, dbContext);
     }
 
-    /**
-     * Detects category by scanning synonyms.
-     * IMPORTANT: Removes intent triggers from category detection.
-     */
+
     private String detectCategoryFromText(String lowerText) {
 
         List<String> keys = new ArrayList<>(SYNONYM_TO_CATEGORY.keySet());
-        keys.sort((a, b) -> Integer.compare(b.length(), a.length())); // longest first
+        keys.sort((a, b) -> Integer.compare(b.length(), a.length())); 
 
         for (String key : keys) {
             if (lowerText.contains(key)) {
@@ -212,13 +209,13 @@ public class AiChatController {
     private String extractCleanTitle(String text) {
         if (text == null) return "";
 
-        // Remove question marks, punctuation
+
         text = text.replaceAll("[^a-zA-Z0-9\\s]", "");
 
-        // Remove common filler words
+
         text = text.replaceAll("\\b(is|the|a|an|do|does|can|please|tell me|if|about|available)\\b", " ");
 
-        // Collapse spaces
+
         text = text.replaceAll("\\s+", " ").trim();
 
         return text;

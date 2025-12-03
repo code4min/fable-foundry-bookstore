@@ -1,0 +1,22 @@
+package com.bookstore.controller;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/chat")
+@CrossOrigin(origins = "http://localhost:3000")
+public class AiChatController {
+
+    private final GeminiService geminiService;
+
+    public AiChatController(GeminiService geminiService) {
+        this.geminiService = geminiService;
+    }
+
+    @PostMapping(consumes = "application/json", produces = "text/plain")
+    public String chat(@RequestBody Map<String, String> request) {
+        String message = request.get("message");
+        return geminiService.generateResponse(message);
+    }
+}

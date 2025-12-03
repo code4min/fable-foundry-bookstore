@@ -6,9 +6,9 @@ import com.bookstore.model.Book;
 import com.bookstore.repository.CartRepository;
 import com.bookstore.repository.PurchaseRepository;
 import com.bookstore.repository.BookRepository;
-import com.bookstore.repository.UserRepository; // ✅ NEW
+import com.bookstore.repository.UserRepository; 
 import com.bookstore.model.User;
-import com.bookstore.util.ActivityLogger; // ✅ NEW
+import com.bookstore.util.ActivityLogger; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,10 +32,10 @@ public class PurchaseController {
     private BookRepository bookRepository;
 
     @Autowired
-    private UserRepository userRepository; // ✅ NEW
+    private UserRepository userRepository; 
 
     @Autowired
-    private ActivityLogger activityLogger; // ✅ NEW
+    private ActivityLogger activityLogger; 
 
     private LocalDate computeEstimatedDeliveryDate() {
         return LocalDate.now().plusDays(new Random().nextInt(8) + 3);
@@ -89,7 +89,7 @@ public class PurchaseController {
 
         cartRepository.deleteAll(cartItems);
 
-        // ✅ Log user activity
+
         Optional<User> userOpt = userRepository.findByEmail(email);
         userOpt.ifPresent(u -> activityLogger.log(u.getId(), email, "Completed a purchase of " + cartItems.size() + " items"));
 

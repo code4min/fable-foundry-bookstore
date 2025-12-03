@@ -5,7 +5,7 @@ import com.bookstore.repository.UserRepository;
 import com.bookstore.service.UserService;
 import com.bookstore.dto.UserLoginRequest;
 import com.bookstore.util.JwtUtil;
-import com.bookstore.util.ActivityLogger; // ✅ NEW
+import com.bookstore.util.ActivityLogger; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,14 +34,14 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private ActivityLogger activityLogger; // ✅ NEW
+    private ActivityLogger activityLogger; 
 
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         try {
             User savedUser = userService.registerUser(user);
-            activityLogger.log(savedUser.getId(), savedUser.getEmail(), "User registered successfully"); // ✅
+            activityLogger.log(savedUser.getId(), savedUser.getEmail(), "User registered successfully"); 
             return ResponseEntity.ok(savedUser);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Email already exists or invalid data");
@@ -64,7 +64,7 @@ public class UserController {
             response.put("name", user.getName());
             response.put("role", role);
 
-            activityLogger.log(user.getId(), user.getEmail(), "User logged in"); // ✅
+            activityLogger.log(user.getId(), user.getEmail(), "User logged in"); 
 
             return ResponseEntity.ok(response);
         } else {
@@ -100,7 +100,7 @@ public class UserController {
             existingUser.setAddress(updatedUser.getAddress());
             userRepository.save(existingUser);
 
-            activityLogger.log(existingUser.getId(), existingUser.getEmail(), "Updated contact information"); // ✅
+            activityLogger.log(existingUser.getId(), existingUser.getEmail(), "Updated contact information"); 
             return ResponseEntity.ok("Contact info updated successfully.");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
@@ -127,7 +127,7 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
 
-        activityLogger.log(user.getId(), user.getEmail(), "Changed password"); // ✅
+        activityLogger.log(user.getId(), user.getEmail(), "Changed password");
         return ResponseEntity.ok("Password updated successfully.");
     }
 
@@ -135,7 +135,7 @@ public class UserController {
     public ResponseEntity<String> deactivateAccount(@RequestParam String email) {
         userService.deactivateUser(email);
         Optional<User> userOpt = userRepository.findByEmail(email);
-        userOpt.ifPresent(u -> activityLogger.log(u.getId(), u.getEmail(), "Account deactivated")); // ✅
+        userOpt.ifPresent(u -> activityLogger.log(u.getId(), u.getEmail(), "Account deactivated")); 
         return ResponseEntity.ok("Account deactivated successfully");
     }
 }

@@ -15,13 +15,13 @@ public class UserActivityController {
     @Autowired
     private UserActivityService userActivityService;
 
-    // ✅ Get all logs (global)
+
     @GetMapping("/all")
     public ResponseEntity<List<UserActivity>> getAllActivities() {
         return ResponseEntity.ok(userActivityService.getAllActivities());
     }
 
-    // ✅ Get logs for a specific user
+
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<UserActivity>> getUserActivities(@PathVariable Long userId) {
         return ResponseEntity.ok(userActivityService.getActivitiesByUserId(userId));

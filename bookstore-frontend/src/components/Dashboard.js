@@ -23,6 +23,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import TrendingUp from '@mui/icons-material/TrendingUp';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Footer from "./Footer";
@@ -237,7 +238,7 @@ function Dashboard() {
       {!isFilterActive && (
         <Container sx={{ mb: 4 }}>
           <Typography variant="h5" sx={{ color: "#3E2723", mb: 2 }}>
-            🔥 Trending Books
+              <TrendingUp sx={{color :"#cd461dff"}} fontSize="large" />   Trending Books
           </Typography>
 
           <Box

@@ -16,13 +16,13 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    // ✅ 1. Get all categories
+
     @GetMapping
     public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
     }
 
-    // ✅ 2. Get category by ID
+
     @GetMapping("/{id}")
     public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
         return categoryService.getCategoryById(id)
@@ -30,7 +30,7 @@ public class CategoryController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // ✅ 3. Add category
+
     @PostMapping
     public ResponseEntity<?> addCategory(@RequestBody Category category) {
         try {
@@ -41,7 +41,7 @@ public class CategoryController {
         }
     }
 
-    // ✅ 4. Update category
+
     @PutMapping("/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody Category category) {
         Category updated = categoryService.updateCategory(id, category);
@@ -52,7 +52,7 @@ public class CategoryController {
         }
     }
 
-    // ✅ 5. Delete category
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         boolean deleted = categoryService.deleteCategory(id);

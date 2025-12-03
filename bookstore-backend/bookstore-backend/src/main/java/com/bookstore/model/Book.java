@@ -16,13 +16,13 @@ public class Book {
 
     private String author;
 
-    // ✅ Many-to-One relationship with Category
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("books") // prevents infinite recursion if Category has a list of books
     private Category category;
 
-    private String image; // Can be a relative path like "/images/books/book1.jpg"
+    private String image; 
 
     @Column(length = 1000)
     private String description;

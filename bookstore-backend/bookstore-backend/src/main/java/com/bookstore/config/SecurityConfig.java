@@ -27,7 +27,7 @@ public class SecurityConfig {
                 corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
                 corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                 corsConfig.setAllowedHeaders(Arrays.asList("*"));
-                corsConfig.setAllowCredentials(true); // Must be true if sending Authorization header
+                corsConfig.setAllowCredentials(true); 
                 return corsConfig;
             }))
             .authorizeHttpRequests(auth -> auth

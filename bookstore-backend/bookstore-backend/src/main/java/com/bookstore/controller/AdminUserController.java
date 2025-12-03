@@ -2,7 +2,7 @@ package com.bookstore.controller;
 
 import com.bookstore.model.User;
 import com.bookstore.service.UserService;
-import com.bookstore.util.ActivityLogger; // ✅ NEW
+import com.bookstore.util.ActivityLogger; 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class AdminUserController {
     private UserService userService;
 
     @Autowired
-    private ActivityLogger activityLogger; // ✅ NEW
+    private ActivityLogger activityLogger; 
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
@@ -54,7 +54,7 @@ public class AdminUserController {
             userService.toggleUserStatus(id);
 
             String action = newStatus ? "Admin reactivated user" : "Admin deactivated user";
-            activityLogger.log(id, user.getEmail(), action); // ✅ Log admin action
+            activityLogger.log(id, user.getEmail(), action); 
 
             return ResponseEntity.ok("User status updated successfully");
         } catch (RuntimeException e) {
@@ -62,7 +62,7 @@ public class AdminUserController {
         }
     }
 
-    // ⚠️ OLD MOCK LOGS (You can remove later once frontend uses /api/admin/activities/user/{id})
+    
     @GetMapping("/{id}/logs")
     public ResponseEntity<?> getUserLogs(@PathVariable Long id) {
         Map<String, Object> logs = new HashMap<>();

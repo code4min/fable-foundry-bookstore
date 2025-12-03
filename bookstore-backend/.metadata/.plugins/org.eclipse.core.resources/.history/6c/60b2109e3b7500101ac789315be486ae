@@ -1,0 +1,158 @@
+package com.bookstore.controller;
+
+import com.bookstore.model.User;
+import com.bookstore.repository.UserRepository;
+import com.bookstore.service.UserService;
+import com.bookstore.dto.UserLoginRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import com.bookstore.util.JwtUtil;
+import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+
+
+
+@RestController
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = "*")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+    
+    @Autowired
+    private JwtUtil jwtUtil;
+    
+    @Autowired
+    private UserRepository userRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        try {
+            User savedUser = userService.registerUser(user);
+            return ResponseEntity.ok(savedUser);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Email already exists or invalid data");
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody UserLoginRequest request) {
+        boolean isAuthenticated = userService.loginUser(request.getEmail(), request.getPassword());
+
+        if (isAuthenticated) {
+            String token = jwtUtil.generateToken(request.getEmail());
+            
+            User user = userService.getByEmail(request.getEmail());
+
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Login successful");
+            response.put("token", token);
+            response.put("email", user.getEmail());
+            response.put("name", user.getName());
+
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+        }
+    }
+    
+    @GetMapping("/profile")
+    public ResponseEntity<?> getUserProfile(HttpServletRequest request) {
+        // This email was set in JwtAuthenticationFilter after validating the token
+        String email = (String) request.getAttribute("userEmail");
+
+        if (email == null) {
+            return ResponseEntity.status(401).body("Unauthorized access: token missing or invalid");
+        }
+
+        return ResponseEntity.ok("You are authenticated as: " + email);
+    }
+    
+    @GetMapping
+    public ResponseEntity<User> getUserByEmail(@RequestParam String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        return userOptional.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    
+    @PutMapping("/updateContact")
+    public ResponseEntity<String> updateContactInfo(@RequestBody User updatedUser) {
+        Optional<User> existingUserOpt = userRepository.findByEmail(updatedUser.getEmail());
+
+        if (existingUserOpt.isPresent()) {
+            User existingUser = existingUserOpt.get();
+            existingUser.setNumber(updatedUser.getNumber());
+            existingUser.setAddress(updatedUser.getAddress());
+            userRepository.save(existingUser);
+            return ResponseEntity.ok("Contact info updated successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+        }
+    }
+    
+    @PutMapping("/changePassword")
+    public ResponseEntity<String> changePassword(@RequestBody Map<String, String> passwordData) {
+        String email = passwordData.get("email");
+        String oldPassword = passwordData.get("oldPassword");
+        String newPassword = passwordData.get("newPassword");
+
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+        }
+
+        User user = optionalUser.get();
+
+        // Check if old password matches
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect current password.");
+        }
+
+        // Set new encrypted password
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+
+        return ResponseEntity.ok("Password updated successfully.");
+    }
+
+    @DeleteMapping("/deactivate")
+    public ResponseEntity<?> deactivateAccount(@RequestBody DeactivateAccountRequest request) {
+        Optional<User> userOpt = userRepository.findByEmail(request.getEmail());
+
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+
+        User user = userOpt.get();
+
+        // Verify password
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid password");
+        }
+
+        // Nullify user-related foreign keys (purchases, wishlist, cart)
+        purchaseRepository.updateEmailToNull(request.getEmail());
+        wishlistRepository.deleteByEmail(request.getEmail());
+        cartRepository.deleteByEmail(request.getEmail());
+
+        // Finally delete the user
+        userRepository.delete(user);
+
+        return ResponseEntity.ok("Account deleted successfully");
+    }
+
+
+
+}

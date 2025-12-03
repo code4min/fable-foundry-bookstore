@@ -14,7 +14,7 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    // Optional: helpful if you ever need to list all books in a category
+    // Optional: if i ever need to list all books in a category
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Book> books;
 

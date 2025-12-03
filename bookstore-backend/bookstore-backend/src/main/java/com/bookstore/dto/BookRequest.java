@@ -3,7 +3,7 @@ package com.bookstore.dto;
 public class BookRequest {
     private String title;
     private String author;
-    private Long categoryId; // Only send ID from frontend
+    private Long categoryId; 
     private String image;
     private String description;
     private boolean trending;

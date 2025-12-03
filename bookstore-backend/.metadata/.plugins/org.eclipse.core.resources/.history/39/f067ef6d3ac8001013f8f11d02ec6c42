@@ -1,0 +1,35 @@
+package com.bookstore.controller;
+
+import com.bookstore.service.GeminiService;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.bookstore.dto.ChatRequest;
+
+@RestController
+@RequestMapping("/api/ai")
+@CrossOrigin(origins = "http://localhost:3000")
+public class AiChatController {
+
+    private final GeminiService geminiService;
+
+    @Autowired
+    public AiChatController(GeminiService geminiService) {
+        this.geminiService = geminiService;
+    }
+    
+    @GetMapping("/models")
+    public String listModels() {
+        geminiService.listAvailableModels();
+        return "Model list printed in backend console.";
+    }
+
+
+    @PostMapping(value = "/chat", consumes = "application/json", produces = "text/plain")
+    public String chat(@RequestBody ChatRequest request) {
+        String userMessage = request.getMessage();
+        if (userMessage == null || userMessage.trim().isEmpty()) {
+            return "Please write a message.";
+        }
+        return geminiService.generateResponse(userMessage);
+    }
+}
