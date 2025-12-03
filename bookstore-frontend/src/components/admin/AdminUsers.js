@@ -53,16 +53,16 @@ const AdminUsers = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
 
-  // logs dialog
+ 
   const [logsOpen, setLogsOpen] = useState(false);
   const [logsData, setLogsData] = useState(null);
   const [logsLoading, setLogsLoading] = useState(false);
 
-  // ✅ NEW: user details dialog
+  
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
-  // notification
+  
   const [notif, setNotif] = useState({
     open: false,
     message: "",
@@ -71,7 +71,7 @@ const AdminUsers = () => {
 
   const [togglingUserId, setTogglingUserId] = useState(null);
 
-  // ================== FETCH USERS ==================
+  
   const fetchUsers = async (opts = {}) => {
     const query =
       opts.searchQuery !== undefined ? opts.searchQuery : searchQuery;
@@ -118,7 +118,7 @@ const AdminUsers = () => {
     fetchUsers({ searchQuery: "", filterStatus: "" });
   };
 
-  // ================== TOGGLE STATUS ==================
+  
   const toggleUserStatus = async (user) => {
     const id = user.id;
     try {
@@ -145,12 +145,12 @@ const AdminUsers = () => {
     }
   };
 
-  // ================== LOGS ==================
+  
   const openLogs = async (user) => {
     try {
       setLogsLoading(true);
       setLogsOpen(true);
-      // ✅ UPDATED endpoint
+      
       const res = await axiosInstance.get(`/admin/activities/user/${user.id}`);
       setLogsData(res.data);
     } catch (err) {
@@ -167,7 +167,7 @@ const AdminUsers = () => {
     setLogsData(null);
   };
 
-  // ================== DETAILS DIALOG ==================
+  
   const openDetails = (user) => {
     setSelectedUser(user);
     setDetailsOpen(true);
@@ -187,7 +187,7 @@ const AdminUsers = () => {
         Manage Users
       </Typography>
 
-      {/* Search + Filter */}
+      
       <Paper sx={{ p: 2, mb: 3, backgroundColor: "#f3edda", borderRadius: 3 }}>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} sm={5}>
@@ -252,7 +252,7 @@ const AdminUsers = () => {
         </Grid>
       </Paper>
 
-      {/* USERS TABLE */}
+      
       <TableContainer
         component={Paper}
         sx={{ backgroundColor: "#f3edda", borderRadius: 3 }}
@@ -343,8 +343,7 @@ const AdminUsers = () => {
         )}
       </TableContainer>
 
-      {/* ================== LOGS DIALOG ================== */}
-      {/* ================== LOGS DIALOG ================== */}
+      
       <Dialog open={logsOpen} onClose={closeLogs} fullWidth maxWidth="sm">
         <DialogTitle sx={{ backgroundColor: "#9E9770", color: "white" }}>
           User Activity Logs
@@ -404,9 +403,7 @@ const AdminUsers = () => {
       </Dialog>
 
 
-      {/* ================== USER DETAILS DIALOG ================== */}
-      {/* ================== USER DETAILS DIALOG ================== */}
-      {/* ================== USER DETAILS DIALOG ================== */}
+      
 <Dialog open={detailsOpen} onClose={closeDetails} fullWidth maxWidth="sm">
   <DialogTitle
     sx={{
@@ -534,7 +531,7 @@ const AdminUsers = () => {
 </Dialog>
 
 
-      {/* ================== SNACKBAR ================== */}
+     
       <Snackbar
         open={notif.open}
         autoHideDuration={3000}
