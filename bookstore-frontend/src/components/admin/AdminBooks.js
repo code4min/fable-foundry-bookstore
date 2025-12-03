@@ -57,10 +57,10 @@ const AdminBooks = () => {
     price: "",
     image: "",
     trending: false,
-    stock: "", // ✅ Added stock field
+    stock: "", 
   });
 
-  // Fetch books and categories
+  
   useEffect(() => {
     fetchBooks();
     fetchCategories();
@@ -84,14 +84,14 @@ const AdminBooks = () => {
     }
   };
 
-  // Handle search
+  
   const filteredBooks = books.filter(
     (book) =>
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       book.author.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Open add/edit form
+ 
   const handleOpenForm = (book = null) => {
     setEditingBook(book);
     setFormData(
@@ -104,7 +104,7 @@ const AdminBooks = () => {
             price: book.price,
             image: book.image,
             trending: book.trending,
-            stock: book.stock ?? "", // ✅ Added
+            stock: book.stock ?? "", 
           }
         : {
             title: "",
@@ -114,19 +114,19 @@ const AdminBooks = () => {
             price: "",
             image: "",
             trending: false,
-            stock: "", // ✅ Added
+            stock: "", 
           }
     );
     setOpenForm(true);
   };
 
-  // Close form
+ 
   const handleCloseForm = () => {
     setOpenForm(false);
     setEditingBook(null);
   };
 
-  // Handle form input
+  
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -135,12 +135,12 @@ const AdminBooks = () => {
     }));
   };
 
-  // ✅ Submit form with notifications
+  
   const handleSubmit = async () => {
     try {
       const payload = {
         ...formData,
-        stock: parseInt(formData.stock || 0, 10), // ✅ ensure integer
+        stock: parseInt(formData.stock || 0, 10), 
       };
 
       if (editingBook) {
@@ -170,7 +170,7 @@ const AdminBooks = () => {
     }
   };
 
-  // ✅ Delete confirmation handling
+  
   const handleOpenDelete = (id) => {
     setDeleteId(id);
     setOpenDeleteConfirm(true);
@@ -212,7 +212,7 @@ const AdminBooks = () => {
         Manage Books
       </Typography>
 
-      {/* Search + Add Button Row */}
+      
       <Box
         sx={{
           display: "flex",
@@ -280,7 +280,7 @@ const AdminBooks = () => {
               <TableCell sx={{ color: "white", fontWeight: "bold" }}>Author</TableCell>
               <TableCell sx={{ color: "white", fontWeight: "bold" }}>Category</TableCell>
               <TableCell sx={{ color: "white", fontWeight: "bold" }}>Price</TableCell>
-              <TableCell sx={{ color: "white", fontWeight: "bold" }}>Stock</TableCell> {/* ✅ New */}
+              <TableCell sx={{ color: "white", fontWeight: "bold" }}>Stock</TableCell> 
               <TableCell sx={{ color: "white", fontWeight: "bold" }}>Trending</TableCell>
               <TableCell sx={{ color: "white", fontWeight: "bold" }}>Edit</TableCell>
               <TableCell sx={{ color: "white", fontWeight: "bold" }}>Delete</TableCell>
