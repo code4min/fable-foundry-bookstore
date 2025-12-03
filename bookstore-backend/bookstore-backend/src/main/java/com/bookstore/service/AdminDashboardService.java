@@ -36,10 +36,7 @@ public class AdminDashboardService {
         return new DashboardSummaryDTO(totalBooks, totalUsers, totalOrders, totalRevenue);
     }
 
-    /**
-     * sales trend for last `days` (including today).
-     * returns list of SalesPointDTO sorted by date ascending
-     */
+    
     public List<SalesPointDTO> getSalesTrend(int days) {
         if (days <= 0) days = 7;
         LocalDate end = LocalDate.now();
@@ -47,7 +44,7 @@ public class AdminDashboardService {
 
         List<Purchase> purchases = purchaseRepository.findByPurchaseDateBetween(start, end);
 
-        // build map date -> revenue
+        
         Map<LocalDate, Double> map = new HashMap<>();
         for (int i = 0; i < days; i++) {
             map.put(start.plusDays(i), 0.0);
@@ -89,7 +86,7 @@ public class AdminDashboardService {
     }
 
     public List<Purchase> getRecentPurchases(int limit) {
-        // simplest: fetch all and sort by purchaseDate desc -> but better to create a query
+        
         List<Purchase> all = purchaseRepository.findAll();
         return all.stream()
                 .sorted(Comparator.comparing(Purchase::getPurchaseDate, Comparator.nullsLast(Comparator.reverseOrder())))
