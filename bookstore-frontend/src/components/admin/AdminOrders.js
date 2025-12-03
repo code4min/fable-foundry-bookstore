@@ -29,7 +29,7 @@ import {
 } from "@mui/icons-material";
 import axiosInstance from "../../api/axiosInstance";
 
-// 🧠 MEMOIZED ROW COMPONENT (renders only when that row’s props change)
+
 const OrderRow = React.memo(({ order, onEdit }) => (
   <TableRow
     sx={{
@@ -111,7 +111,7 @@ const AdminOrders = () => {
     fetchOrders();
   }, []);
 
-  // 🕐 Debounce search to avoid lag on typing
+  
   useEffect(() => {
     const timeout = setTimeout(() => {
       setDebouncedSearch(searchEmail);
@@ -119,7 +119,7 @@ const AdminOrders = () => {
     return () => clearTimeout(timeout);
   }, [searchEmail]);
 
-  // 🧠 Memoized filtered orders (runs only when filters or data change)
+  
   const filteredOrders = useMemo(() => {
     return orders.filter((order) => {
       const matchesEmail = debouncedSearch
@@ -142,7 +142,7 @@ const AdminOrders = () => {
     setOpenEdit(false);
   };
 
-  // 💡 Optimized save — updates only one order in state instead of refetching all
+  
   const handleSave = async () => {
     if (!selectedOrder) return;
     try {
@@ -268,7 +268,7 @@ const AdminOrders = () => {
         </Grid>
       </Paper>
 
-      {/* Orders Table */}
+      
       <TableContainer
         component={Paper}
         sx={{
@@ -298,7 +298,7 @@ const AdminOrders = () => {
         </Table>
       </TableContainer>
 
-      {/* Edit Dialog */}
+      
       <Dialog
         open={openEdit}
         onClose={handleCloseEdit}
@@ -361,7 +361,7 @@ const AdminOrders = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Notifications */}
+     
       <Snackbar
         open={notification.open}
         autoHideDuration={3000}
