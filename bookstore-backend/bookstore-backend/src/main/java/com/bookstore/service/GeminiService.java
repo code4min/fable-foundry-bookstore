@@ -14,11 +14,11 @@ public class GeminiService {
     @Value("${gemini.api.key}")
     private String apiKey;
 
-    // Gemini Model URL
+    
     private static final String MODEL_URL =
             "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=";
 
-    // 🔥 FIXED SYSTEM PROMPT: This controls the bookstore’s personality & rules
+    
     private static final String SYSTEM_PROMPT =
             "You are the official AI assistant of Fable Foundry Bookstore. "
             + "Your job is to assist customers with book availability, recommendations from our own inventory, "
@@ -31,29 +31,24 @@ public class GeminiService {
             + "5. If no relevant inventory data is provided, politely say you don’t have info.\n"
             + "You must ALWAYS act as the Fable Foundry assistant.";
 
-    /**
-     * Generate AI response using:
-     * - systemPrompt (fixed)
-     * - dbContext (optional dynamic data from DB search)
-     * - userMessage (raw user's question)
-     */
+    
     public String generateResponse(String userMessage, String dbContext) {
 
         try {
             RestTemplate restTemplate = new RestTemplate();
             ObjectMapper mapper = new ObjectMapper();
 
-            // Escape quotes to avoid breaking JSON
+            
             String safeUser = userMessage.replace("\"", "\\\"");
             String safeContext = dbContext == null ? "" : dbContext.replace("\"", "\\\"");
 
-            // 🧩 BUILD FULL PROMPT (system + context + user)
+            
             String fullPrompt =
                     "SYSTEM:\n" + SYSTEM_PROMPT + "\n\n"
                     + "CONTEXT FROM DATABASE:\n" + safeContext + "\n\n"
                     + "USER:\n" + safeUser;
 
-            // 📌 Gemini v1 API – NO roles, just a text part
+            
             String requestBody =
                     "{ \"contents\": [ { \"parts\": [ { \"text\": \"" + fullPrompt + "\" } ] } ] }";
 
