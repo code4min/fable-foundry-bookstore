@@ -12,15 +12,15 @@ public class UserActivity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // user id (FK to users table) — keep nullable if activity may originate without a user
+    
     @Column(name = "user_id")
     private Long userId;
 
-    // short action keyword, e.g. "LOGIN", "ADD_TO_CART", "PURCHASE"
+    
     @Column(nullable = false, length = 100)
     private String action;
 
-    // optional details (JSON or plain text)
+    
     @Column(length = 1000)
     private String details;
 
