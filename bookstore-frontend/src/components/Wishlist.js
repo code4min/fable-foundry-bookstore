@@ -139,7 +139,7 @@ const Wishlist = () => {
 
                   <Box sx={{ display: 'flex', gap: 1, mt: 2 }}>
 
-                    {/* Updated Remove button */}
+                    
                     <Button
                       variant="outlined"
                       onClick={() => handleRemove(book.id)}
@@ -155,7 +155,7 @@ const Wishlist = () => {
                       Remove
                     </Button>
 
-                    {/* Updated Move to Cart button */}
+                    
                     <Button
                       variant="contained"
                       sx={{
