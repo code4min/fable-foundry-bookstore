@@ -14,7 +14,7 @@ public class UserActivityService {
     @Autowired
     private UserActivityRepository userActivityRepository;
 
-    // --- Create a log entry ---
+    
     public void logActivity(Long userId, String action, String details) {
         UserActivity activity = new UserActivity();
         activity.setUserId(userId);
@@ -24,12 +24,12 @@ public class UserActivityService {
         userActivityRepository.save(activity);
     }
 
-    // --- Fetch all logs for a user ---
+    
     public List<UserActivity> getActivitiesByUserId(Long userId) {
         return userActivityRepository.findByUserIdOrderByCreatedAtDesc(userId);
     }
 
-    // --- Fetch all logs (for admin dashboard global view) ---
+    
     public List<UserActivity> getAllActivities() {
         return userActivityRepository.findAllByOrderByCreatedAtDesc();
     }
